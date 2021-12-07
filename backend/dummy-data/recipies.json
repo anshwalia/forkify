@@ -1,0 +1,19 @@
+[
+    { 
+        "name": "Shahi Paneer", 
+        "category": "Veg", 
+        "cook_time": 35
+    },
+
+    {
+        "name": "Butter Chicken",
+        "category": "Non-Veg",
+        "cook_time": 60
+    },
+
+    {
+        "name": "Cheese Burger",
+        "category": "Veg",
+        "cook_time": 30
+    }
+]
