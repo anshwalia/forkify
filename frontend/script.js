@@ -8,9 +8,9 @@ const contentBox = document.querySelector("#contentBox");
 
 console.log(contentBox);
 
-Controller.getAllRecipies()
-.then((recipies) => { 
-    return Controller.displayAllRecipies(recipies,contentBox); 
+Controller.getAllRecipes()
+.then((recipes) => { 
+    return Controller.displayAllRecipes(recipes,contentBox); 
 })
 .then((status) => { console.log(status); })
 .catch((error) => { console.error(error); });

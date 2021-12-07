@@ -4,7 +4,7 @@
 const View = {
 
     // Method To Create Recipie Card
-    createRecipieCard: function(category="",name="",cook_time=0){
+    createRecipeCard: function(category="",name="",cook_time=0){
         return new Promise((resolve,reject) => {
             try{
                 const recipieCard = document.createElement("div");
@@ -27,15 +27,15 @@ const View = {
     },
 
     // Method To Create Multiple Recipie Cards
-    createRecipieCards: async function(recipies=[]){
+    createRecipeCards: async function(recipes=[]){
         try{
-            const recipieCards = [];
-            for(let i = 0; i < recipies.length; i++){
-                const recipieCard = await this.createRecipieCard(recipies[i].category,recipies[i].name,recipies[i].cook_time);
-                recipieCards.push(recipieCard);
+            const recipeCards = [];
+            for(let i = 0; i < recipes.length; i++){
+                const recipeCard = await this.createRecipeCard(recipes[i].category,recipes[i].name,recipes[i].cook_time);
+                recipeCards.push(recipeCard);
             }
-            console.log(recipieCards);
-            return recipieCards;
+            console.log(recipeCards);
+            return recipeCards;
         }
         catch(error){ console.error(error); }
     }

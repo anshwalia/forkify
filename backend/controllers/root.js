@@ -12,12 +12,12 @@ const RootController = {
 
     GET: function(req,res){
         try{
-            DataModel.readFile(path.resolve(__dirname,'../dummy-data/recipies.json'))
-            .then((recipies) => { 
+            DataModel.readFile(path.resolve(__dirname,'../dummy-data/recipes.json'))
+            .then((recipes) => { 
                 res.status(200).json({
                     ok: true,
                     status: 'success',
-                    recipies: recipies
+                    recipes: recipes
                 });
             })
             .catch((error) => { console.error(error); });

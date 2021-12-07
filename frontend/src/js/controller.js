@@ -8,11 +8,11 @@ import View from './view.js';
 const Controller = {
 
     // Method To Get All Recipies From API
-    getAllRecipies: async function(){
+    getAllRecipes: async function(){
         try{
             const data = await Model.GET('http://localhost:5000/');
             if(data.ok === true){
-                return data.recipies;
+                return data.recipes;
             }
             else{
                 throw new Error(`Failed To Get Recipies : ${data.message}`);
@@ -22,12 +22,12 @@ const Controller = {
     },
 
     // Method To Display All Recipies In Content Box AS Cards
-    displayAllRecipies: async function(recipies=[],parentElement){
+    displayAllRecipes: async function(recipes=[],parentElement){
         try{
-            const recipieCards = await View.createRecipieCards(recipies);
-            for(let i = 0; i < recipieCards.length; i++){
-                console.log(recipieCards[i])
-                parentElement.appendChild(recipieCards[i]);
+            const recipeCards = await View.createRecipeCards(recipes);
+            for(let i = 0; i < recipeCards.length; i++){
+                console.log(recipeCards[i])
+                parentElement.appendChild(recipeCards[i]);
             }
             return "All Recipies Displayed!";
         }
