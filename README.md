@@ -1,2 +1,2 @@
-# forkify
-Recipie App
+# Forkify
+A Simple Recipies App
