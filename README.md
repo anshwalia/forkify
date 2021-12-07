@@ -1,2 +1,2 @@
 # Forkify
-A Simple Recipies App
+A Simple Recipes App
