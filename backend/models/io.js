@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DataModel = {
+const IOModel = {
 
     // Method To Read Data File
     readFile: async function(filePath=''){
@@ -22,4 +22,4 @@ const DataModel = {
 
 }
 
-module.exports = DataModel;
+module.exports = IOModel;
