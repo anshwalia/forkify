@@ -4,6 +4,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 
 // Routers
 const RootRouter = require('./routers/root');
@@ -19,9 +20,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
+// Static Files
+app.use('/static',express.static(path.resolve(__dirname,'./public')));
+
 // Routes
 // ROOT
 app.use('/',RootRouter);
+// ALL
+app.use('/all',AllRouter);
 // SEARCH
 app.use('/search',SearchRouter);
 // INVALID

@@ -1,29 +1,19 @@
 'use strict';
 
+// Component Modules Import
+import Card from './components/cards.js'
+
 // View Module
 const View = {
 
-    // Method To Create Recipie Card
-    createRecipeCard: function(category="",name="",cook_time=0){
-        return new Promise((resolve,reject) => {
-            try{
-                const recipieCard = document.createElement("div");
-                recipieCard.className = "card m-3 p-0";
-                recipieCard.innerHTML = `
-                    <div class="card-header">
-                        <p>${category}</p>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="heading">${name}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <p>${cook_time} Minutes</p>
-                    </div>
-                `;
-                resolve(recipieCard);
-            }
-            catch(error){ reject(error); }
-        });
+    contentBox: null,
+
+    init: async function(ContentBoxElement){
+        try{
+            this.contentBox = ContentBoxElement;
+            console.log("View Init Complete!");
+        }
+        catch(error){ throw error; }
     },
 
     // Method To Create Multiple Recipie Cards
@@ -31,13 +21,25 @@ const View = {
         try{
             const recipeCards = [];
             for(let i = 0; i < recipes.length; i++){
-                const recipeCard = await this.createRecipeCard(recipes[i].category,recipes[i].name,recipes[i].cook_time);
+                const recipeCard = await Card.recipeCard(recipes[i]);
                 recipeCards.push(recipeCard);
             }
-            console.log(recipeCards);
             return recipeCards;
         }
-        catch(error){ console.error(error); }
+        catch(error){ throw error; }
+    },
+
+    // Method To Render Recipe Cards 
+    renderRecipeCards: async function(recipes=[]){
+        try{
+            this.contentBox.innerHTML = '';
+            this.contentBox.style.display = 'none';
+            const recipeCards = await this.createRecipeCards(recipes);
+            for(let i = 0; i < recipeCards.length; i++){
+                this.contentBox.appendChild(recipeCards[i]);
+            }
+        }
+        catch(error){ throw error; }
     }
 
 }

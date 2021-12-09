@@ -1,5 +1,10 @@
 'use strict';
 
+// Node Modules
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
+
 // DATA MODEL MODULE
 const DataModel = require('../models/io');
 
@@ -10,7 +15,12 @@ const AllController = {
     GET : function(req,res){
         try{
             DataModel.readFile(path.resolve(__dirname,'../dummy-data/recipes.json'))
-            .then((recipes) => { 
+            .then((recipes) => {
+                // Building Image URLs
+                recipes = recipes.map(recipe => {
+                    recipe.imageURL = `http://localhost:${process.env.PORT}${recipe.imageURL}`;
+                    return recipe;
+                });
                 res.status(200).json({
                     ok: true,
                     status: 'success',

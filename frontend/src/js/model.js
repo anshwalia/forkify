@@ -1,19 +1,25 @@
 'use strict';
 
-// Model Module
-const Model = {
+export const state = {
+    recipes: [],
+    recipe: {},
+};
 
-    // Method To Get Data From API
-    GET: async function(api_endpoint=''){
-        try{
-            const response = await fetch(api_endpoint);
-            const data = response.json();
-            return data;
-        }
-        catch(error){ console.error(error); }
-    },
-
+export const loadAllRecipes = async function(){
+    try{
+        const response = await fetch("http://localhost:5000/all");
+        const data = await response.json();
+        if(data.ok === true){ state.recipes = data.recipes; }
+        else{ throw new Error("Unable To Fetch Recipes From API"+`Code : ${response.status}`); }
+    }
+    catch(error){ console.error(error); }
 }
 
-
-export default Model;
+export const loadRecipe = async function(id=0){
+    try{
+        const response = await fetch(`http://localhost:5000/recipes/${id}`);
+        const data = response.json();
+        return data;
+    }
+    catch(error){ console.error(error); }
+}

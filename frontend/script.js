@@ -3,14 +3,19 @@
 // Module Imports
 import Controller from './src/js/controller.js';
 
-// DOM Objects
-const contentBox = document.querySelector("#contentBox");
+$(document).ready(async () => {
 
-console.log(contentBox);
+    await Controller.init(document.querySelector("#contentBox"));
 
-Controller.getAllRecipes()
-.then((recipes) => { 
-    return Controller.displayAllRecipes(recipes,contentBox); 
-})
-.then((status) => { console.log(status); })
-.catch((error) => { console.error(error); });
+    $(".container-fluid").fadeIn('slow');
+
+    $("#getAllRecipesBtn").click(async () => {
+        try{
+            await Controller.getAllRecipes();
+            await Controller.displayAllRecipes();
+            $("#contentBox").fadeIn('slow');
+        }
+        catch(error){ console.log(error); }
+    });
+
+});
