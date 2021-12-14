@@ -3,7 +3,21 @@
 // Recipe Card Component
 class RecipeCard {
 
-    constructor(){ console.log("[Recipe Card Instance Created]"); }
+    #ContentBox = null;
+
+    // For Debugging
+    #displayLogs = null;
+
+    constructor(ContentBox,displayLogs=false){ 
+        try{
+            this.#ContentBox = ContentBox;
+            this.#displayLogs = displayLogs;
+
+            // For Debugging
+            if(this.#displayLogs){ console.log("[Recipe Card Instance Created]"); }
+        }
+        catch(error){ throw error; }
+    }
 
     // Method To Get Recipe Category Color Class
     #getRecipeCategoryColor(recipeCategory=""){
@@ -11,7 +25,7 @@ class RecipeCard {
     }
 
     // Recipe Card Component
-    create(recipe){
+    #create(recipe){
         return new Promise((resolve,reject) => {
             try{
                 const newRecipeCard = document.createElement('div');
@@ -41,11 +55,41 @@ class RecipeCard {
 
                     </div>
                 `;
+
+                // For Debugging
+                if(this.#displayLogs){ console.log("[Recipe Card Created]"); }
                 
                 resolve(newRecipeCard);
             }
             catch(error){ reject(error); }
         });
+    }
+
+    // Method To Create Multiple Recipe Cards
+    async #createMultiple(recipes=[]){
+        try{
+            const recipeCards = [];
+            for(let i = 0; i < recipes.length; i++){
+                recipeCards.push(await this.#create(recipes[i]));
+            }
+            // For Debugging
+            if(this.#displayLogs){ console.log(`[Created ${recipeCards.length} Recipe Cards]`); }
+            return recipeCards;
+        }
+        catch(error){ throw error; }
+    }
+
+    // Method To Display Recipe Cards
+    async display(recipes=[]){
+        try{
+            const recipeCards = await this.#createMultiple(recipes);
+            for(let i = 0; i < recipeCards.length; i++){
+                this.#ContentBox.appendChild(recipeCards[i]);
+            }
+            // For Debugging
+            if(this.#displayLogs){ console.log(`${recipes.length} Recipe Cards Displayed`)}
+        }
+        catch(error){ throw error; }
     }
 
 }

@@ -6,9 +6,14 @@ import Controller from './src/js/Controller.js';
 // JQuery
 $(document).ready(async () => {
 
+    // Controller Instance
+    let controller = null;
+
     async function startup(){
         try{
-            await Controller.init(document.querySelector("#contentBox"));
+            const AlertBox = document.querySelector("#AlertBox");
+            const ContentBox = document.querySelector("#ContentBox");
+            controller = new Controller(AlertBox,ContentBox);
             $(".container-fluid").fadeIn('slow');
         }
         catch(error){ console.error(error); }
@@ -23,17 +28,17 @@ $(document).ready(async () => {
         try{
             const searchTerm = $("#searchBox").val();
             $("#searchBox").val('');
-            await Controller.getMatchingRecipes(searchTerm);
-            $("#contentBox").fadeIn('slow');
+            await controller.getMatchingRecipes(searchTerm);
+            $("#ContentBox").fadeIn('slow');
         }
         catch(error){ console.error(error); }
     });
 
     $("#getAllRecipesBtn").click(async () => {
         try{
-            await Controller.getAllRecipes();
-            await Controller.displayRecipes();
-            $("#contentBox").fadeIn('slow');
+            await controller.getAllRecipes();
+            await controller.displayAllRecipes();
+            $("#ContentBox").fadeIn('slow');
         }
         catch(error){ console.error(error); }
     });

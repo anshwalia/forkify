@@ -3,10 +3,23 @@
 // Recipe View Component
 class RecipeSheet {
 
-    constructor(){ console.log("[Recipe Sheet Instance Created]"); }
+    #ContentBox = null;
 
-    // Method To Create Recipe View
-    create(recipe){
+    // For Debugging
+    #displayLogs = null;
+
+    constructor(ContentBox,displayLogs=false){ 
+        try{
+            this.#ContentBox = ContentBox;
+            this.#displayLogs = displayLogs;
+            // For Debugging
+            if(this.#displayLogs){ console.log("[Recipe Sheet Instance Created]"); }
+        }
+        catch(error){ throw error; }
+    }
+
+    // Method To Create Recipe Sheet
+    #create(recipe){
         return new Promise((resolve,reject) => {
             try{
                 const recipeView = document.createElement('div');
@@ -24,6 +37,17 @@ class RecipeSheet {
             catch(error){ reject(error); }
         });
     }
+
+    // Method To Display Recipe Sheet
+    async display(recipe){
+        try{
+            this.#ContentBox.innerHTML = '';
+            const recipeSheet = await this.#create(recipe);
+            this.#ContentBox.appendChild(recipeSheet);
+        }
+        catch(error){ throw error; }
+    }
+
 }
 
 export default RecipeSheet;

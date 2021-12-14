@@ -2,8 +2,10 @@
 
 class State {
 
-    recipes = [];
+    allRecipes = [];
+    
     matchingRecipes = [];
+
     recipe = {};
 
     constructor(){ console.log("[State Instance Created]"); }
