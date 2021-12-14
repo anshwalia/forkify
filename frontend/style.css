@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #f4f1de;
+    background-color: #f9ffff;
   }
   
 * {
@@ -19,4 +19,22 @@ html, body {
     width: 100%;
     height: 15vw;
     object-fit: cover;
+}
+
+.card-header{
+    background-color: #e08c4f;
+}
+
+/* Buttons */
+
+.view-btn{
+    background-color: #ce6722;
+}
+
+.save-btn{
+    background-color: #ce6722;
+}
+
+.share-btn{
+    background-color: #ce6722;
 }

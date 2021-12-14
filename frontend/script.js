@@ -1,21 +1,42 @@
 'use strict';
 
 // Module Imports
-import Controller from './src/js/controller.js';
+import Controller from './src/js/Controller.js';
 
+// JQuery
 $(document).ready(async () => {
 
-    await Controller.init(document.querySelector("#contentBox"));
+    async function startup(){
+        try{
+            await Controller.init(document.querySelector("#contentBox"));
+            $(".container-fluid").fadeIn('slow');
+        }
+        catch(error){ console.error(error); }
+    }
 
-    $(".container-fluid").fadeIn('slow');
+    await startup();
+    
+    // -------------------------------------------------------------
+    // EVENTS
+    // -------------------------------------------------------------
+    $("#searchBtn").click(async () => {
+        try{
+            const searchTerm = $("#searchBox").val();
+            $("#searchBox").val('');
+            await Controller.getMatchingRecipes(searchTerm);
+            $("#contentBox").fadeIn('slow');
+        }
+        catch(error){ console.error(error); }
+    });
 
     $("#getAllRecipesBtn").click(async () => {
         try{
             await Controller.getAllRecipes();
-            await Controller.displayAllRecipes();
+            await Controller.displayRecipes();
             $("#contentBox").fadeIn('slow');
         }
-        catch(error){ console.log(error); }
+        catch(error){ console.error(error); }
     });
+    // -------------------------------------------------------------
 
 });

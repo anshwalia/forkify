@@ -1,5 +1,6 @@
 [
     { 
+        "id": 0,
         "name": "Shahi Paneer", 
         "category": "Veg", 
         "cook_time": 35,
@@ -7,6 +8,7 @@
     },
 
     {
+        "id": 1,
         "name": "Butter Chicken",
         "category": "Non-Veg",
         "cook_time": 60,
@@ -14,6 +16,7 @@
     },
 
     {
+        "id": 2,
         "name": "Cheese Burger",
         "category": "Veg",
         "cook_time": 30,
@@ -21,6 +24,7 @@
     },
 
     { 
+        "id": 3,
         "name": "Masala Dosa", 
         "category": "Veg", 
         "cook_time": 45,
@@ -28,6 +32,7 @@
     },
 
     {
+        "id": 4,
         "name": "Taco",
         "category": "Veg",
         "cook_time": 20,
@@ -35,9 +40,19 @@
     },
 
     {
+        "id": 5,
         "name": "Pepproni Pizza",
         "category": "Non-Veg",
         "cook_time": 30,
         "imageURL": "/static/images/pepperoni_pizza.jpeg"
+    },
+
+    { 
+        "id": 6,
+        "name": "Plain Dosa", 
+        "category": "Veg", 
+        "cook_time": 20,
+        "imageURL": "/static/images/plain_dosa.jpeg"
     }
+
 ]

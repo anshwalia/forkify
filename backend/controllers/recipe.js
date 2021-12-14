@@ -1,35 +1,29 @@
 'use strict';
 
-// Node Modules
-const path = require('path');
-const dotenv = require('dotenv');
-dotenv.config();
-
-// Models
+// IO Model
 const IOModel = require('../models/io');
-const URLModel = require('../models/url');
 
-// ALL CONTROLLER
-const AllController = {
+// Search Model
+const SearchModel = require('../models/search');
 
-    // GET
+// Recipe Controller
+const RecipeController = {
+
+    // GET Method
     GET : async function(req,res){
         try{
-            let recipes = await IOModel.getRecipes();
+            const { id } = req.params;
+            const recipes = await IOModel.getRecipes();
+            const recipe = await SearchModel.searchById(Number(id),recipes);
 
-            if(recipes !== null){
-                // Resolving Image URLs
-                recipes = recipes.map(recipe => {
-                    recipe.imageURL = URLModel.resolve(recipe.imageURL);
-                    return recipe;
-                });
+            if(recipe !== null){
                 // Response
                 res
                 .status(200)
                 .json({
                     ok: true,
                     status: 'success',
-                    recipes: recipes
+                    recipe: recipe
                 });
             }
             else{
@@ -39,24 +33,24 @@ const AllController = {
                 .json({
                     ok: false,
                     status: 'failed',
-                    message: "No Recipes Found!"
+                    message: 'Invalid Recipe ID'
                 });
             }
         }
-        catch(error){ 
+        catch(error){
             console.error(error);
-
             // Response
             res
             .status(500)
             .json({
                 ok: false,
                 status: 'failed',
-                message: "Server Error"
+                message: 'Server Error'
             });
         }
     },
 
 }
 
-module.exports = AllController;
+// Recipe Controller Module Export
+module.exports = RecipeController;

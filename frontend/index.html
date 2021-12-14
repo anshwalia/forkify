@@ -21,28 +21,31 @@
     
     <div class="container-fluid p-2 m-0" style="display: none;">
 
+        <!-- Heading Row -->
         <div class="row p-2 m-3 d-flex justify-content-center">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 d-flex justify-content-center p-2 m-0">
                 <h1 class="heading fw-bold fst-italic m-0">FORKIFY</h1>
             </div>
         </div>
 
+        <!-- Search Box Row -->
         <div class="row d-flex justify-content-center p-0 m-3">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 d-flex justify-content-center p-2 m-0">
                 <div class="input-group shadow rounded p-0 m-0">
-                    <input type="text" class="form-control" placeholder="Search Recipes">
-                    <button class="btn btn-primary" type="button" id="searchGoBtn">Go</button>
+                    <input id="searchBox" type="text" class="form-control" placeholder="Search Recipes">
+                    <button class="btn btn-primary" type="button" id="searchBtn">Go</button>
                 </div>
             </div>
         </div>
 
-
+        <!-- All Recipes Row -->
         <div class="row d-flex justify-content-center p-0 m-3">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 d-flex justify-content-center p-2 m-0">
                 <button class="btn btn-warning shadow rounded" type="button" id="getAllRecipesBtn">Get All Recipes</button>
             </div>
         </div>
 
+        <!-- Content Box -->
         <div id="contentBox" class="row p-0 m-3"></div>
 
     </div>

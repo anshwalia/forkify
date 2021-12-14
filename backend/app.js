@@ -10,6 +10,8 @@ const path = require('path');
 const RootRouter = require('./routers/root');
 const AllRouter = require('./routers/all');
 const SearchRouter = require('./routers/search');
+const RecipeRouter = require('./routers/recipe');
+const InvalidRouter = require('./routers/invalid');
 
 // Express App Instance
 const app = express();
@@ -30,8 +32,10 @@ app.use('/',RootRouter);
 app.use('/all',AllRouter);
 // SEARCH
 app.use('/search',SearchRouter);
+// RECIPE
+app.use('/recipe',RecipeRouter);
 // INVALID
-
+app.use('/*',InvalidRouter);
 
 // Instance Export
 module.exports = app;

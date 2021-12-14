@@ -4,18 +4,21 @@
 const fs = require('fs');
 const path = require('path');
 
+// CONFIG Module Import
+const CONFIG = require('./config');
+
+// Input/Output Model
 const IOModel = {
 
-    // Method To Read Data File
-    readFile: async function(filePath=''){
+    // Method To Read Recipe Data From Data File
+    getRecipes: async function(){
         try{
-            if(fs.existsSync(filePath) === true){
-                const fileData = JSON.parse(fs.readFileSync(filePath));
-                return fileData;
+            const dataFilePath = await CONFIG.DataFilePath();
+            if(fs.existsSync(dataFilePath) === true){
+                const recipes = JSON.parse(fs.readFileSync(dataFilePath));
+                return recipes;
             }
-            else{
-                throw new Error("File Does Not Exist!");
-            }
+            else{ throw new Error("File Does Not Exist!"); }
         }
         catch(error){ console.error(error);  }
     }
