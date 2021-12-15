@@ -1,12 +1,23 @@
 'use strict';
 
-// CONFIG
-import { API_URL } from './Config'
-
 // Data Model
 class DataModel {
 
-    constructor(){ console.log("[Data Model Instance Created]"); }
+    // API URL
+    #API_URL = null;
+
+    // For Debugging
+    #displayLogs = null;
+
+    constructor(API_URL,displayLogs=false){
+        try{
+            this.#API_URL = API_URL;
+            this.#displayLogs = displayLogs;
+            // For Debugging
+            if(this.#displayLogs){ console.log("[DataModel Class](Instance Created)"); }
+        }
+        catch(error){ throw error; }
+    }
 
     // Request Time Out
     #requestTimeOut(timeSec=2){
@@ -23,7 +34,7 @@ class DataModel {
     // Method To Load All Recipes From API
     async loadAllRecipes(){
         try{
-            const response = await Promise.race([fetch(API_URL+'all'),this.#requestTimeOut()]);
+            const response = await Promise.race([fetch(`${this.#API_URL}recipe/all`),this.#requestTimeOut()]);
             if(response !== null){
                 const data = await response.json();
                 if(data.ok === true){ return data.recipes; }
@@ -39,7 +50,7 @@ class DataModel {
     // Method To Load Matching Recipes From API
     async loadMatchingRecipes(searchTerm=""){
         try{
-            const response = await fetch(`${API_URL}search?name=${searchTerm}`);
+            const response = await Promise.race([fetch(`${this.#API_URL}search?name=${searchTerm}`),this.#requestTimeOut()]);
             const data = await response.json();
             if(data.ok === true){
                 return data.recipes;

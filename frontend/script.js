@@ -1,24 +1,21 @@
 'use strict';
 
 // Module Imports
+import App from './src/js/App.js';
 import Controller from './src/js/Controller.js';
 
 // JQuery
 $(document).ready(async () => {
 
-    // Controller Instance
-    let controller = null;
-
     async function startup(){
         try{
-            const AlertBox = document.querySelector("#AlertBox");
-            const ContentBox = document.querySelector("#ContentBox");
-            controller = new Controller(AlertBox,ContentBox);
+            App.AlertBox = document.querySelector("#AlertBox");
+            App.ContentBox = document.querySelector("#ContentBox");
+            App.Controller = new Controller(App.AlertBox,App.ContentBox);
             $(".container-fluid").fadeIn('slow');
         }
         catch(error){ console.error(error); }
     }
-
     await startup();
     
     // -------------------------------------------------------------
@@ -28,7 +25,7 @@ $(document).ready(async () => {
         try{
             const searchTerm = $("#searchBox").val();
             $("#searchBox").val('');
-            await controller.getMatchingRecipes(searchTerm);
+            await App.Controller.getMatchingRecipes(searchTerm);
             $("#ContentBox").fadeIn('slow');
         }
         catch(error){ console.error(error); }
@@ -36,8 +33,8 @@ $(document).ready(async () => {
 
     $("#getAllRecipesBtn").click(async () => {
         try{
-            await controller.getAllRecipes();
-            await controller.displayAllRecipes();
+            await App.Controller.getAllRecipes();
+            await App.Controller.displayAllRecipes();
             $("#ContentBox").fadeIn('slow');
         }
         catch(error){ console.error(error); }

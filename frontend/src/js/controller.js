@@ -1,6 +1,8 @@
 'use strict';
 
 // Module Imports
+// Config
+import { API_URL } from './Config'
 // Models
 import State from './models/State.js';
 import DataModel from './models/Data.js';
@@ -15,24 +17,33 @@ class Controller{
     #State = null;
     #DataModel = null;
     #ValidationModel = null;
-    
     // View Instance
     #View = null;
 
+    // For Debugging
+    #displayLogs = null;
+
     // Controller Initialization Method
-    constructor(AlertBox,ContentBox){
+    constructor(AlertBox,ContentBox,displayLogs=false){
         try{
             this.#State = new State();
-            this.#DataModel = new DataModel();
+            this.#DataModel = new DataModel(API_URL,true);
             this.#ValidationModel = new ValidationModel();
             this.#View = new View(AlertBox,ContentBox);
+            this.#displayLogs = displayLogs;
+            // For Debugging
+            if(this.#displayLogs){ console.log("[Controller Class](Instance Created)"); }
         }
         catch(error){ throw error; }
     }
 
     // Method To Get All Recipies From API
     async getAllRecipes(){
-        try{ this.#State.allRecipes = await this.#DataModel.loadAllRecipes(); }
+        try{ 
+            this.#State.allRecipes = await this.#DataModel.loadAllRecipes();
+            // For Debugging
+            if(this.#displayLogs){ console.log("[Controller Class](Get All Recipes)"); }
+        }
         catch(error){ console.error(error); }
     }
 
@@ -51,7 +62,7 @@ class Controller{
                 }
             }
             else{
-                alert("Search Term Should Atleast Be 3 Characters Long!");
+                await this.#View.renderAlert('warning',"Search Term Should Atleast Be 3 Characters Long!");
             }
         }
         catch(error){ console.error(error); }
@@ -70,7 +81,8 @@ class Controller{
     async displayRecipeSheet(){
         try{
             await this.#View.renderRecipeSheet();
-            console.log("Recipe Sheet Rendered!");
+            // For Debugging
+            if(this.#displayLogs){ console.log("[Controller Class](Recipe Sheet Rendered)"); }
         }
         catch(error){ throw error; }
     }
