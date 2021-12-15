@@ -8,11 +8,13 @@ const SearchModel = {
         return new Promise((resolve,reject) => {
             try{
                 const regex =  new RegExp(searchTerm,'i');
+                
                 const matchingRecipes = recipes.filter(recipe => {
                     const recipeName = recipe.name;
                     const result = recipeName.search(regex);
                     if(result >= 0){ return recipe; }
                 });
+
                 if(matchingRecipes.length >= 1){ resolve(matchingRecipes); }
                 else{ resolve(null); }
             }
@@ -30,6 +32,7 @@ const SearchModel = {
             catch(error){ reject(error); }
         });
     }
+    
 }
 
 // Search Model Module Export

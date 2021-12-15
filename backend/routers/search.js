@@ -18,10 +18,10 @@ const SearchRouter = new Router();
 SearchRouter.get('/',SearchController.GET);
 
 // Invalid Routes
-SearchRouter.get('/*',InvalidRequestHandler);
-SearchRouter.post('/*',InvalidRequestHandler);
-SearchRouter.put('/*',InvalidRequestHandler);
-SearchRouter.delete('/*',InvalidRequestHandler);
+SearchRouter.get('*',InvalidRequestHandler);
+SearchRouter.post('*',InvalidRequestHandler);
+SearchRouter.put('*',InvalidRequestHandler);
+SearchRouter.delete('*',InvalidRequestHandler);
 
 
 // Search Router Module Export
